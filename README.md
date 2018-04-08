@@ -1,30 +1,32 @@
-淘宝定时任务 tbschedule实战<br/>
-原创 https://blog.csdn.net/convict_eva/article/details/52582847<br/>
-说明：<br/>
+淘宝定时任务 tbschedule实战
+原创 https://blog.csdn.net/convict_eva/article/details/52582847
+说明：
 
 tbschedule项目其实可以分为两部分：
 1）schedule管理控制台。负责控制、监控任务执行状态2）实际执行job的客户端程序。在实际使用时，首先要启动zookeeper, 然后部署tbschedule web界面的管理控制台，最后启动实际执行job的客户机器。这里zookeeper并不实际控制任务调度，它只是负责与N台执行job的客户端通讯，协调、管理、监控这些机器的运行信息。实际分配任务的是tbschedule管理控制台，控制台从zookeeper获取job的运行信息。tbSchedule通过控制ZNode的创建、修改、删除来间接控制Job的执行，执行Job的客户端会监听它们对应ZNode的状态更新事件，从而达到通过tbSchedule控制Job执行的目的。
 
 解决项目依赖：
 
-下载源码tbschedule 源码（使用svn 直接checkout）<br/>
+下载源码tbschedule 源码（使用svn 直接checkout）
 ![此处输入图片的描述][1]
 
 
 进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
->mvn clean install -Dmaven.test.skip=true
+
+    >mvn clean install -Dmaven.test.skip=true
+
 运行后tbscheduling.jar 被install 到本地仓库（也可以安装到私服），搭建项目即可依赖。（注意打包的版本）
 
-<p>
-<dependency>  
-    <groupId>com.taobao.pamirs.schedule</groupId>  
-    <artifactId>tbschedule</artifactId>  
-    <version>3.3.3.2</version>  
-</dependency>  
-</P>
+    <dependency>  
+        <groupId>com.taobao.pamirs.schedule</groupId>  
+        <artifactId>tbschedule</artifactId>  
+        <version>3.3.3.2</version>  
+    </dependency>
+
+  
 
 启动schedule管理控制台：
-源码中 console/ScheduleConsole.war 包提制到tomcat，启动即可。（要提前安装zookeeper，这里使用的本机的zookeeper。多个ZKServer可以使用逗号分隔。）
+源码中 `console/ScheduleConsole.war` 包提制到tomcat，启动即可。（要提前安装zookeeper，这里使用的本机的zookeeper。多个ZKServer可以使用逗号分隔。）
 访问schedule管理控制台，配置zookeeper：http://localhost:8080/ScheduleConsole/schedule/config.jsp
 ![此处输入图片的描述][2]
 
@@ -41,53 +43,60 @@ tbscheduling.jar接口说明:
 1、IScheduleTaskDeal 调度器对外的基础接口，是一个基类，并不能被直接使用
 2、IScheduleTaskDealSingle 单任务处理的接口,继承 IScheduleTaskDeal
 3、IScheduleTaskDealMulti 可批处理的任务接口,继承 IScheduleTaskDeal
+
 IScheduleTaskDeal 调度器对外的基础接口
 
-[java] view plain copy
-public interface IScheduleTaskDeal<T> {  
-/** 
- * 根据条件，查询当前调度服务器可处理的任务  
- * @param taskParameter 任务的自定义参数 
- * @param ownSign 当前环境名称 
- * @param taskQueueNum 当前任务类型的任务队列数量 
- * @param taskQueueList 当前调度服务器，分配到的可处理队列 
- * @param eachFetchDataNum 每次获取数据的数量 
- * @return 
- * @throws Exception 
- */  
-public List<T> selectTasks(String taskParameter,String ownSign,int taskQueueNum,List<TaskItemDefine> taskItemList,int eachFetchDataNum) throws Exception;  
+    public interface IScheduleTaskDeal<T> {  
+    /** 
+     * 根据条件，查询当前调度服务器可处理的任务  
+     * @param taskParameter 任务的自定义参数 
+     * @param ownSign 当前环境名称 
+     * @param taskQueueNum 当前任务类型的任务队列数量 
+     * @param taskQueueList 当前调度服务器，分配到的可处理队列 
+     * @param eachFetchDataNum 每次获取数据的数量 
+     * @return 
+     * @throws Exception 
+     */  
+    public List<T> selectTasks(String taskParameter,String ownSign,int taskQueueNum,List<TaskItemDefine> taskItemList,int eachFetchDataNum) throws Exception;
+
+    /** 
+     * 获取任务的比较器,只有在NotSleep模式下需要用到 
+     * @return 
+     */  
+    public Comparator<T> getComparator();  
+    }
+
   
-/** 
- * 获取任务的比较器,只有在NotSleep模式下需要用到 
- * @return 
- */  
-public Comparator<T> getComparator();  
-}  
-IScheduleTaskDealSingle 单任务处理的接口
-[java] view plain copy
-public interface IScheduleTaskDealSingle<T> extends IScheduleTaskDeal<T> {  
-  /** 
-   * 执行单个任务 
-   * @param task Object 
-   * @param ownSign 当前环境名称 
-   * @throws Exception 
-   */  
-  public boolean execute(T task,String ownSign) throws Exception;  
     
-}   
-IScheduleTaskDealMulti 可批处理的任务接口
-[java] view plain copy
-public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {  
+    IScheduleTaskDealSingle 单任务处理的接口
+    
+    public interface IScheduleTaskDealSingle<T> extends IScheduleTaskDeal<T> {  
+      /** 
+       * 执行单个任务 
+       * @param task Object 
+       * @param ownSign 当前环境名称 
+       * @throws Exception 
+       */  
+      public boolean execute(T task,String ownSign) throws Exception; 
+    }
+
    
-/** 
- *  执行给定的任务数组。因为泛型不支持new 数组，只能传递OBJECT[] 
- * @param tasks 任务数组 
- * @param ownSign 当前环境名称 
- * @return 
- * @throws Exception 
- */  
-  public boolean execute(Object[] tasks,String ownSign) throws Exception;  
-}  
+    IScheduleTaskDealMulti 可批处理的任务接口
+    
+    public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {  
+    /** 
+     *  执行给定的任务数组。因为泛型不支持new 数组，只能传递OBJECT[] 
+     * @param tasks 任务数组 
+     * @param ownSign 当前环境名称 
+     * @return 
+     * @throws Exception 
+     */  
+      public boolean execute(Object[] tasks,String ownSign) throws Exception; 
+    }
+
+ 
+
+ 
 
 
 配置说明：
