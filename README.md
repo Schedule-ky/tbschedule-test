@@ -11,6 +11,8 @@ tbschedule项目其实可以分为两部分：
 ![此处输入图片的描述][1]
 
 
+
+
 进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
 >mvn clean install -Dmaven.test.skip=true
 运行后tbscheduling.jar 被install 到本地仓库（也可以安装到私服），搭建项目即可依赖。（注意打包的版本）
