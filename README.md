@@ -1,4 +1,5 @@
 淘宝定时任务 tbschedule实战
+原创 2016年09月19日 10:12:36 标签：spring /quartz /tbschedule 4422
 说明：
 
 tbschedule项目其实可以分为两部分：
@@ -7,6 +8,7 @@ tbschedule项目其实可以分为两部分：
 解决项目依赖：
 
 下载源码tbschedule 源码（使用svn 直接checkout）
+![此处输入图片的描述][1]
 
 
 进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
@@ -23,7 +25,7 @@ tbschedule项目其实可以分为两部分：
 启动schedule管理控制台：
 源码中 console/ScheduleConsole.war 包提制到tomcat，启动即可。（要提前安装zookeeper，这里使用的本机的zookeeper。多个ZKServer可以使用逗号分隔。）
 访问schedule管理控制台，配置zookeeper：http://localhost:8080/ScheduleConsole/schedule/config.jsp
-
+![此处输入图片的描述][2]
 
 
 配置完后，可以访问“管理页面”
@@ -88,11 +90,11 @@ public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {
 
 
 配置说明：
-
+![此处输入图片的描述][3]
 
 
 任务名称：用于标识“任务”和策略的关联关系；
-
+![此处输入图片的描述][4]
 
 
 
@@ -128,3 +130,8 @@ http://code.taobao.org/p/tbschedule/wiki/index/
 
 http://www.111cn.net/jsp/Jsp-Servlet/72059.htm
 
+
+  [1]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1000.png
+  [2]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1002.png
+  [3]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1003.png
+  [4]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1004.png
