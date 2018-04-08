@@ -1,5 +1,5 @@
 淘宝定时任务 tbschedule实战
-原创 2016年09月19日 10:12:36 标签：spring /quartz /tbschedule 4422
+
 说明：
 
 tbschedule项目其实可以分为两部分：
