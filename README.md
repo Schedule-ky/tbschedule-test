@@ -8,7 +8,7 @@ tbschedule项目其实可以分为两部分：
 解决项目依赖：
 
 下载源码tbschedule 源码（使用svn 直接checkout）
-
+![Alt text](https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1000.png)
 
 
 进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
