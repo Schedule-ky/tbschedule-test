@@ -1,5 +1,5 @@
-    淘宝定时任务 tbschedule实战
-    原创 https://www.zybuluo.com/mdeditor#1103489
+淘宝定时任务 tbschedule实战
+    原创 https://blog.csdn.net/convict_eva/article/details/52582847
     说明：
     
     tbschedule项目其实可以分为两部分：
