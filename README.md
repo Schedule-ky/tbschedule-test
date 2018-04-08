@@ -1,5 +1,4 @@
 淘宝定时任务 tbschedule实战
-原创 2016年09月19日 10:12:36 标签：spring /quartz /tbschedule 4422
 说明：
 
 tbschedule项目其实可以分为两部分：
@@ -8,10 +7,9 @@ tbschedule项目其实可以分为两部分：
 解决项目依赖：
 
 下载源码tbschedule 源码（使用svn 直接checkout）
-  ![Alt text](https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1000.png)
 
 
-  进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
+进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
 >mvn clean install -Dmaven.test.skip=true
 运行后tbscheduling.jar 被install 到本地仓库（也可以安装到私服），搭建项目即可依赖。（注意打包的版本）
 
@@ -129,3 +127,4 @@ public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {
 http://code.taobao.org/p/tbschedule/wiki/index/
 
 http://www.111cn.net/jsp/Jsp-Servlet/72059.htm
+
