@@ -1,5 +1,42 @@
-淘宝定时任务 tbschedule实战
+通告：验证邮箱以开启部落所有功能，例如：评注交流。我们曾向您的邮箱 1229647502@qq.com 发送过验证邮件，您也可以 重新发送 或者 更新邮箱 。 [关闭]
+   
 
+
+    淘宝定时任务 tbschedule实战
+    原创 2016年09月19日 10:12:36 标签：spring /quartz /tbschedule 4422
+    说明：
+    
+    tbschedule项目其实可以分为两部分：
+    1）schedule管理控制台。负责控制、监控任务执行状态2）实际执行job的客户端程序。在实际使用时，首先
+要启动zookeeper, 然后部署tbschedule 
+web界面的管理控制台，最后启动实际执行job的客户机器。这里zookeeper并不实际控制任务调度，它只是负责与N
+台执行job的客户端通讯，协调、管理、监控这些机器的运行信息。实际分配任务的是tbschedule管理控制台，控
+制台从zookeeper获取job的运行信息。tbSchedule通过控制ZNode的创建、修改、删除来间接控制Job的执行，执行
+Job的客户端会监听它们对应ZNode的状态更新事件，从而达到通过tbSchedule控制Job执行的目的。
+    
+    解决项目依赖：
+    
+    下载源码tbschedule 源码（使用svn 直接checkout）
+    ![此处输入图片的描述][1]
+    
+    
+    进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
+    >mvn clean install -Dmaven.test.skip=true
+    运行后tbscheduling.jar 被install 
+到本地仓库（也可以安装到私服），搭建项目即可依赖。（注意打包的版本）
+    
+    [html] view plain copy
+    <dependency>  
+        <groupId>com.taobao.pamirs.schedule</groupId>  
+        <artifactId>tbschedule</artifactId>  
+        <version>3.3.3.2</version>  
+    </dependency>  
+    
+    启动schedule管理控制台：
+kaiyun     文件    发布       
+    
+淘宝定时任务 tbschedule实战
+原创 2016年09月19日 10:12:36 标签：spring /quartz /tbschedule 4422
 说明：
 
 tbschedule项目其实可以分为两部分：
@@ -9,8 +46,6 @@ tbschedule项目其实可以分为两部分：
 
 下载源码tbschedule 源码（使用svn 直接checkout）
 ![此处输入图片的描述][1]
-
-
 
 
 进入到 D:\tbschedule\trunk 目录(根据自己下载的源码目录)，运行打包命令：
@@ -57,7 +92,7 @@ public interface IScheduleTaskDeal<T> {
  * @throws Exception 
  */  
 public List<T> selectTasks(String taskParameter,String ownSign,int taskQueueNum,List<TaskItemDefine> taskItemList,int eachFetchDataNum) throws Exception;  
-  
+
 /** 
  * 获取任务的比较器,只有在NotSleep模式下需要用到 
  * @return 
@@ -74,12 +109,12 @@ public interface IScheduleTaskDealSingle<T> extends IScheduleTaskDeal<T> {
    * @throws Exception 
    */  
   public boolean execute(T task,String ownSign) throws Exception;  
-    
+
 }   
 IScheduleTaskDealMulti 可批处理的任务接口
 [java] view plain copy
 public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {  
-   
+
 /** 
  *  执行给定的任务数组。因为泛型不支持new 数组，只能传递OBJECT[] 
  * @param tasks 任务数组 
@@ -137,3 +172,6 @@ http://www.111cn.net/jsp/Jsp-Servlet/72059.htm
   [2]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1002.png
   [3]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1003.png
   [4]: https://github.com/pro-common/pictureSource/blob/master/tbschedule-test/1004.png
++
+@kaiyun 2018-04-08 17:44 字数 阅读 0
+
