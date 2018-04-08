@@ -15,12 +15,13 @@ tbschedule项目其实可以分为两部分：
 >mvn clean install -Dmaven.test.skip=true
 运行后tbscheduling.jar 被install 到本地仓库（也可以安装到私服），搭建项目即可依赖。（注意打包的版本）
 
-[html] view plain copy
+<p>
 <dependency>  
     <groupId>com.taobao.pamirs.schedule</groupId>  
     <artifactId>tbschedule</artifactId>  
     <version>3.3.3.2</version>  
 </dependency>  
+</P>
 
 启动schedule管理控制台：
 源码中 console/ScheduleConsole.war 包提制到tomcat，启动即可。（要提前安装zookeeper，这里使用的本机的zookeeper。多个ZKServer可以使用逗号分隔。）
