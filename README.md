@@ -1,13 +1,13 @@
-淘宝定时任务 tbschedule实战
-原创 https://blog.csdn.net/convict_eva/article/details/52582847
-说明：
+淘宝定时任务 tbschedule实战<br/>
+原创 https://blog.csdn.net/convict_eva/article/details/52582847<br/>
+说明：<br/>
 
 tbschedule项目其实可以分为两部分：
 1）schedule管理控制台。负责控制、监控任务执行状态2）实际执行job的客户端程序。在实际使用时，首先要启动zookeeper, 然后部署tbschedule web界面的管理控制台，最后启动实际执行job的客户机器。这里zookeeper并不实际控制任务调度，它只是负责与N台执行job的客户端通讯，协调、管理、监控这些机器的运行信息。实际分配任务的是tbschedule管理控制台，控制台从zookeeper获取job的运行信息。tbSchedule通过控制ZNode的创建、修改、删除来间接控制Job的执行，执行Job的客户端会监听它们对应ZNode的状态更新事件，从而达到通过tbSchedule控制Job执行的目的。
 
 解决项目依赖：
 
-下载源码tbschedule 源码（使用svn 直接checkout）
+下载源码tbschedule 源码（使用svn 直接checkout）<br/>
 ![此处输入图片的描述][1]
 
 
@@ -68,7 +68,7 @@ IScheduleTaskDeal 调度器对外的基础接口
 
   
     
-    IScheduleTaskDealSingle 单任务处理的接口
+IScheduleTaskDealSingle 单任务处理的接口
     
     public interface IScheduleTaskDealSingle<T> extends IScheduleTaskDeal<T> {  
       /** 
@@ -81,7 +81,8 @@ IScheduleTaskDeal 调度器对外的基础接口
     }
 
    
-    IScheduleTaskDealMulti 可批处理的任务接口
+
+IScheduleTaskDealMulti 可批处理的任务接口
     
     public interface IScheduleTaskDealMulti<T>  extends IScheduleTaskDeal<T> {  
     /** 
