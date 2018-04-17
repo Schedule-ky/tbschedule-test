@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">	
+
+	<bean id="singleTask" class="com.convict.tbschedule.SingleTask" />
+	
+	<!--tbschedule管理器初始化（配置zookeeper,注册调度任务和调度策略）-->
+    <bean id="scheduleManagerFactory" class="com.taobao.pamirs.schedule.strategy.TBScheduleManagerFactory">
+        <property name="zkConfig">
+            <map>
+                <entry key="zkConnectString" value="127.0.0.1:2181" />
+                <entry key="rootPath" value="/myself/tbscheduleStudy" />
+                <entry key="userName" value="root" />
+                <entry key="password" value="123456" />
+                <entry key="zkSessionTimeout" value="8000" />
+                <entry key="isCheckParentPath" value="true" />
+            </map>
+        </property>
+    </bean>
+
+
+</beans>
+

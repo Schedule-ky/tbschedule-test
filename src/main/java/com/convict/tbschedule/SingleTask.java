@@ -50,6 +50,10 @@ public class SingleTask implements IScheduleTaskDealSingle<OrderInfo> {
         return null;
     }
 
+    /**
+     * 获取任务的比较器,主要在NotSleep模式下需要用到
+     * @return
+     */
     @Override
     public Comparator<OrderInfo> getComparator() {
         return null;
