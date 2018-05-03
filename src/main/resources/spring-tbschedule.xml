@@ -8,17 +8,18 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        ">	
 
-	<bean id="singleTask" class="com.convict.tbschedule.SingleTask" />
+	<!-- <bean id="singleTask" class="com.convict.tbschedule.SingleTask" /> -->
 	
 	<!--tbschedule管理器初始化（配置zookeeper,注册调度任务和调度策略）-->
-    <bean id="scheduleManagerFactory" class="com.taobao.pamirs.schedule.strategy.TBScheduleManagerFactory">
+    <bean id="scheduleManagerFactory" class="com.taobao.pamirs.schedule.strategy.TBScheduleManagerFactory"
+    	init-method="init">
         <property name="zkConfig">
             <map>
                 <entry key="zkConnectString" value="127.0.0.1:2181" />
                 <entry key="rootPath" value="/myself/tbscheduleStudy" />
-                <entry key="userName" value="root" />
-                <entry key="password" value="123456" />
-                <entry key="zkSessionTimeout" value="8000" />
+                <entry key="userName" value="" />
+                <entry key="password" value="" />
+                <entry key="zkSessionTimeout" value="60000" />
                 <entry key="isCheckParentPath" value="true" />
             </map>
         </property>

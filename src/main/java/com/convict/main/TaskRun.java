@@ -17,7 +17,7 @@ public class TaskRun {
 
         Properties p = new Properties();
         p.put("zkConnectString", "127.0.0.1:2181");
-        p.put("rootPath", "/schedule");
+        p.put("rootPath", "/myself/tbscheduleStudy");
         p.put("zkSessionTimeout", "60000");
         p.put("userName", "");
         p.put("password", "");

@@ -29,6 +29,11 @@
 			<artifactId>tbschedule</artifactId>
 			<version>3.3.3.2</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.apache.zookeeper</groupId>
+		  <artifactId>zookeeper</artifactId>
+		  <version>3.4.6</version>
+		</dependency>
 		
 		<!-- Spring Dependency Begin -->
         <dependency>
@@ -324,8 +329,8 @@
                     <verbose>true</verbose>
                     <fork>true</fork>
                     <compilerArgument>-nowarn</compilerArgument>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

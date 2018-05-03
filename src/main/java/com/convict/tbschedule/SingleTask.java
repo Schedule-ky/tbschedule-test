@@ -1,16 +1,19 @@
 package com.convict.tbschedule;
 
-import com.convict.model.OrderInfo;
-import com.taobao.pamirs.schedule.IScheduleTaskDealSingle;
-import com.taobao.pamirs.schedule.TaskItemDefine;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import com.convict.model.OrderInfo;
+import com.taobao.pamirs.schedule.IScheduleTaskDealSingle;
+import com.taobao.pamirs.schedule.TaskItemDefine;
+
 /**
  * Created by Jamin on 2016/9/14.
  */
+@Component("singleTask")
 public class SingleTask implements IScheduleTaskDealSingle<OrderInfo> {
 
     /**
